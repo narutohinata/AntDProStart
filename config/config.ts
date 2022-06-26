@@ -1,8 +1,7 @@
 // https://umijs.org/config/
-import { defineConfig } from 'umi';
 import { join } from 'path';
+import { defineConfig } from 'umi';
 
-import defaultSettings from './defaultSettings';
 import proxy from './proxy';
 import routes from './routes';
 
@@ -16,16 +15,16 @@ export default defineConfig({
   },
   layout: {
     // https://umijs.org/zh-CN/plugins/plugin-layout
-    navTheme: "light",
-    primaryColor: "#13C2C2",
-    layout: "mix",
-    contentWidth: "Fluid",
+    navTheme: 'light',
+    primaryColor: '#13C2C2',
+    layout: 'mix',
+    contentWidth: 'Fluid',
     fixedHeader: false,
     fixSiderbar: true,
     pwa: false,
-    logo: "https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg",
+    logo: 'https://wwwcdn.coconut.is/s/website/img/logo.png?1655345524',
     headerHeight: 48,
-    splitMenus: false
+    splitMenus: false,
   },
   // https://umijs.org/zh-CN/plugins/plugin-locale
   locale: {

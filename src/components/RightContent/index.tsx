@@ -1,15 +1,26 @@
-import { Space } from 'antd';
-import { QuestionCircleOutlined } from '@ant-design/icons';
-import React from 'react';
-import { useModel, SelectLang } from 'umi';
-import Avatar from './AvatarDropdown';
-import HeaderSearch from '../HeaderSearch';
+import { TOKEN } from '@/constants';
+import { Button, Space } from 'antd';
+import React, { useCallback } from 'react';
+import { history, SelectLang, useModel } from 'umi';
 import styles from './index.less';
 
 export type SiderTheme = 'light' | 'dark';
 
+const logOut = async () => {
+  window.localStorage.removeItem(TOKEN);
+};
+
 const GlobalHeaderRight: React.FC = () => {
-  const { initialState } = useModel('@@initialState');
+  const { initialState, setInitialState } = useModel('@@initialState');
+
+  const handleLogoutBtnClick = useCallback(async () => {
+    await logOut();
+    setInitialState((s) => ({
+      ...s,
+      currentUser: null,
+    }));
+    history.push('/user/login');
+  }, []);
 
   if (!initialState || !initialState.settings) {
     return null;
@@ -23,7 +34,7 @@ const GlobalHeaderRight: React.FC = () => {
   }
   return (
     <Space className={className}>
-      <HeaderSearch
+      {/* <HeaderSearch
         className={`${styles.action} ${styles.search}`}
         placeholder="站内搜索"
         defaultValue="umi ui"
@@ -45,16 +56,22 @@ const GlobalHeaderRight: React.FC = () => {
         // onSearch={value => {
         //   console.log('input', value);
         // }}
-      />
-      <span
+      /> */}
+      {/* <span
         className={styles.action}
         onClick={() => {
           window.open('https://pro.ant.design/docs/getting-started');
         }}
       >
         <QuestionCircleOutlined />
-      </span>
-      <Avatar />
+      </span> */}
+      {/* <Avatar /> */}
+      <h4 className={`${styles.name} anticon`}>{initialState.currentUser?.username}</h4>
+      {initialState.currentUser?.username && (
+        <Button onClick={handleLogoutBtnClick} size="small" danger ghost>
+          登出
+        </Button>
+      )}
       <SelectLang className={styles.action} />
     </Space>
   );

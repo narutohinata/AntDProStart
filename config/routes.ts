@@ -4,7 +4,6 @@
     layout: false,
     routes: [
       {
-        name: 'login',
         path: '/user/login',
         component: './user/Login',
       },
@@ -14,22 +13,25 @@
     ],
   },
   {
-    path: '/welcome',
-    name: '首页',
+    name: 'home',
+    locale: 'menu.home',
     icon: 'home',
+    path: '/welcome',
     component: './Welcome',
   },
   {
     path: '/admin',
-    name: '管理员功能',
-    icon: 'crown',
+    name: 'admin',
+    locale: 'menu.admin',
     access: 'canAdmin',
+    icon: 'crown',
     component: './Admin',
     routes: [
       {
+        access: 'canAdminSubPage',
+        name: 'subPage',
+        locale: 'menu.admin.sub-page',
         path: '/admin/sub-page',
-        name: '管理权限',
-        icon: 'smile',
         component: './Welcome',
       },
       {
@@ -38,9 +40,10 @@
     ],
   },
   {
-    name: '表单',
-    icon: 'table',
     path: '/list',
+    name: '列表',
+    locale: 'menu.list',
+    icon: 'table',
     component: './TableList',
   },
   {
